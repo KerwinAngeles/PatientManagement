@@ -1,0 +1,65 @@
+﻿@using GestorPacientes.Core.Application.ViewModels.LaboratoryTestResult
+
+@model List<LaboratoryTestResultViewModel>;
+
+@{
+    ViewData["Title"] = "All Laboratory Test Result";
+}
+
+<body class="bgImage">
+
+    <div class="mb-2 col-4">
+        <form method="post" asp-controller="LaboratoryTestResult" asp-action="SearchIdentification" class="d-flex">
+            <input type="text" name="Identification" class="form-control bg-white text-dark me-2" placeholder="Identification" style="width: 150px;" />
+            <button class="btn btn-outline-success" type="submit" style="font-size: 14px;">Search</button>
+        </form>
+
+    </div>
+    <div class="col-md-12 col-md-offset-1 justify-content-center align-content-center">
+
+        <div>
+            <form method="post">
+                <div class="justify-content-center">
+                    <div class="col-auto">
+                        <table class="table table-striped table-bordered table-list" style="background-color: #ffffff">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Last Name</th>
+                                    <th>Identification</th>
+                                    <th>Laboratory Test</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            @foreach (GestorPacientes.Core.Application.ViewModels.LaboratoryTestResult.LaboratoryTestResultViewModel item in Model)
+                            {
+                                @if (item is not null)
+                                {
+                                    <tbody class="text-center" style="background-color: #fff0f3">
+                                        <tr>
+                                            <td>@item.PatientName</td>
+                                            <td>@item.PatientLastName</td>
+                                            <td>@item.PatientIdentification</td>
+                                            <td>@item.LaboratoryTestName</td>
+
+                                            <td align="center">
+                                                <a asp-controller="LaboratoryTestResult" asp-action="ReportResult" asp-route-id="@item.Id" class="btn btn-danger">Report</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
+                                @if (item == null)
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        <h4 class="alert-heading">Ups! <i class="fa-solid fa-circle-exclamation"></i></h4>
+                                        <p>That patient it doesn't exist</p>
+                                    </div>
+                                }
+                            }
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

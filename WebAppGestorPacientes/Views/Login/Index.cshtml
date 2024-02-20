@@ -1,0 +1,39 @@
+﻿@using GestorPacientes.Core.Application.ViewModels.Users;
+@model LoginViewModel;
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<body>
+    <div class="wrapper">
+        <div class="container main">
+            <div class="row">
+                <div class="col-md-6 side-image">
+                </div>
+                <div class="col-md-6 right">
+                    <form method="post" asp-controller="Login" asp-action="Index">
+                        <div class="input-box" id="box">
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            <header><i class="fa-solid fa-right-from-bracket"></i> Login</header>
+
+                            <div class="input-field">
+                                <input type="text" class="input" asp-for="UserName">
+                                <label asp-for="UserName" class="form-label">User Name</label>
+                            </div>
+
+                            <div class="input-field">
+                                <input type="password" class="input" asp-for="Password">
+                                <label asp-for="Password" class="form-label">Password</label>
+                            </div>
+
+                            <div class="input-field">
+                                <input type="submit" class="submit" value="Login">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

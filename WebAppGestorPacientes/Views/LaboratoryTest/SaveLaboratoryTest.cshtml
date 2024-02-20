@@ -1,0 +1,29 @@
+﻿@model GestorPacientes.Core.Application.ViewModels.LaboratoryTest.SaveLaboratoryTestViewModel;
+@{
+    ViewData["Title"] = "Create and edit Laboratory Test";
+    bool editModo = Model.Id == 0 ? false : true;
+}
+
+<div class="container-fluid">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-white text-dark">
+                <h5 class="text-center">@(editModo ? $"" : "") <i class="fa-solid fa-flask-vial"></i></h5>
+            </div>
+            <div class="card-body" style="background-color: #d3d3d3">
+                <form method="post" asp-controller="LaboratoryTest" asp-action="@(editModo ? "Edit" : "Create")">
+                    <div class="mb-1">
+                        <label asp-for="Name" class="form-label">Name: </label>
+                        <input asp-for="Name" class="form-control bg-white text-dark" placeholder="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <input type="hidden" asp-for="Id" />
+                    <a asp-controller="LaboratoryTest" asp-action="Index" class="btn btn-secondary">Back</a>
+                    <button type="submit" class="btn btn-light">Save</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

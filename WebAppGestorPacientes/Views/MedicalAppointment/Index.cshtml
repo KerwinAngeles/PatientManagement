@@ -1,0 +1,68 @@
+﻿@using GestorPacientes.Core.Application.ViewModels.MedicalAppointment;
+
+@model List<MedicalAppointmentViewModel>;
+
+@{
+    ViewData["Title"] = "All Patients";
+}
+
+<body class="bgImage">
+    <div class="col-md-12 col-md-offset-1 justify-content-center align-content-center">
+
+
+        <div class="mb-3">
+            <a asp-controller="MedicalAppointment" asp-action="Create" class="btn btn-secondary">Create</a>
+        </div>
+
+        <div>
+            <form method="post">
+                <div class="justify-content-center">
+                    <div class="col-auto">
+                        <table class="table table-striped table-bordered table-list" style="background-color: #ffffff">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Cause</th>
+                                    <th>Date</th>
+                                    <th>Hour</th>
+                                    <th>Patient</th>
+                                    <th>Doctor</th>
+                                    <th>State</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            @foreach (GestorPacientes.Core.Application.ViewModels.MedicalAppointment.MedicalAppointmentViewModel item in Model)
+                            {
+                                <tbody class="text-center" style="background-color: #fff0f3">
+                                    <tr>
+                                        <td>@item.Cause</td>
+                                        <td>@item.Date</td>
+                                        <td>@item.Hour</td>
+                                        <td>@item.PatientName</td>
+                                        <td>@item.DoctorName</td>
+                                        <td>@item.State</td>
+
+                                        <td align="center">
+                                            @if (item.State == "Pending")
+                                            {
+                                                <a asp-controller="LaboratoryTestResult" asp-action="Create" asp-route-id="@item.Id" class="btn btn-success"><i class="fa-solid fa-hourglass-start"></i></a>
+                                            }
+                                            @if (item.State == "Pending Results")
+                                            {
+                                                <a asp-controller="LaboratoryTestResult" asp-action="ListLaboratoryResult" asp-route-id="@item.Id" class="btn btn-success"><i class="fa-solid fa-hourglass-half"></i></a>
+                                            }
+                                            @if (item.State == "Complete")
+                                            {
+                                                <a asp-controller="LaboratoryTestResult" asp-action="LabTestComplete" asp-route-id="@item.Id" class="btn btn-success"><i class="fa-solid fa-hourglass-end"></i></a>
+                                            }
+                                            <a asp-controller="MedicalAppointment" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-delete-left"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

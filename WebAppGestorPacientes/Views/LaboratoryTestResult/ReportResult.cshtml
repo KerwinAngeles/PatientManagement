@@ -1,0 +1,30 @@
+﻿@model GestorPacientes.Core.Application.ViewModels.LaboratoryTestResult.SaveLaboratoryTestResultViewModel;
+@{
+    ViewData["Title"] = "Create Report";
+    var idLab = @ViewBag.labId;
+}
+
+<div class="container-fluid">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-white text-dark text-center">
+                <h5><i class="fa-solid fa-shield-heart"></i></h5>
+            </div>
+            
+            <div class="card-body" style="background-color: #d3d3d3">
+                <form method="post" asp-controller="LaboratoryTestResult" asp-action="ReportResult">
+                    <input type="hidden" value="@idLab" asp-for="Id" />
+                    <div class="mb-1">
+                        <label asp-for="Result" class="form-label">Result: </label>
+                        <input asp-for="Result" class="form-control bg-white text-dark" placeholder="Name" />
+                        <span asp-validation-for="Result" class="text-danger"></span>
+                    </div>
+
+                    <input type="hidden" asp-for="Id" />
+                    <a asp-controller="LaboratoryTestResult" asp-action="Index" class="btn btn-secondary">Back</a>
+                    <button type="submit" class="btn btn-light">Finish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

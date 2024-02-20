@@ -1,0 +1,65 @@
+﻿@model GestorPacientes.Core.Application.ViewModels.Doctors.SaveDoctorsViewModel
+@{
+    ViewData["Title"] = "Create and edit Doctor";
+    bool editModo = Model.Id == 0 ? false : true;
+}
+
+<div class="container-fluid">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-white text-dark">
+                <h5 class="text-center">@(editModo ? $"" : "") <i class="fa-solid fa-user-doctor"></i></h5>
+            </div>
+            <div class="card-body" style="background-color: #d3d3d3">
+                <form method="post" enctype="multipart/form-data" asp-controller="Doctor" asp-action="@(editModo ? "Edit" : "Create")">
+                    <div class="mb-1">
+                        <label asp-for="Name" class="form-label">Name: </label>
+                        <input asp-for="Name" class="form-control bg-white text-dark" placeholder="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="LastName" class="form-label">Last Name: </label>
+                        <input asp-for="LastName" class="form-control bg-white text-dark" placeholder="Last Name" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="Email" class="form-label">Email: </label>
+                        <input asp-for="Email" class="form-control bg-white text-dark" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="File" class="form-label">File: </label>
+                        @if(editModo)
+                        {
+                            <input asp-for="File" class="form-control bg-white text-dark" /> 
+                        }
+                        else
+                        {
+                            <input required asp-for="File" class="form-control bg-white text-dark" />
+                        }
+
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="Phone" class="form-label">Phone: </label>
+                        <input asp-for="Phone" class="form-control bg-white text-dark" placeholder="Phone" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="Identification" class="form-label">Identification: </label>
+                        <input asp-for="Identification" class="form-control bg-white text-dark" placeholder="Identification" />
+                        <span asp-validation-for="Identification" class="text-danger"></span>
+
+                    </div>
+
+                    <input type="hidden" asp-for="Id" />
+                    <a asp-controller="Doctor" asp-action="Index" class="btn btn-secondary">Back</a>
+                    <button type="submit" class="btn btn-light">Save</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

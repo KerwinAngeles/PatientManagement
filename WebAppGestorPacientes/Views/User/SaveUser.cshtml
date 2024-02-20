@@ -1,0 +1,68 @@
+﻿@model GestorPacientes.Core.Application.ViewModels.Users.SaveUserViewModel;
+@{
+    ViewData["Title"] = "Create and edit User";
+    bool editModo = Model.Id == 0 ? false : true;
+}
+
+<div class="container-fluid">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-white text-dark">
+                    <h5 class="text-center">@(editModo ? $"" : "") <i class="fa-solid fa-star-of-life"></i></h5>
+                </div>
+                <div class="card-body" style="background-color: #d3d3d3">
+                    <form method="post" asp-controller="User" asp-action="@(editModo ? "Edit" : "Create")">
+                        <div class="mb-1">
+                            <label asp-for="Name" class="form-label">Name: </label>
+                            <input asp-for="Name" class="form-control bg-white text-dark" placeholder="Name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="mb-1">
+                            <label asp-for="LastName" class="form-label">Last Name: </label>
+                            <input asp-for="LastName" class="form-control bg-white text-dark" placeholder="Last Name" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+
+                        </div>
+                        <div class="mb-1">
+                            <label asp-for="UserName" class="form-label">User Name: </label>
+                            <input asp-for="UserName" class="form-control bg-white text-dark" placeholder="User Name" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+
+                        </div>
+                        <div class="mb-1">
+                            <label asp-for="Email" class="form-label">Email: </label>
+                            <input asp-for="Email" class="form-control bg-white text-dark" placeholder="Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+
+                        </div>
+                         <div class="mb-1">
+                            <label asp-for="Password" class="form-label">Password: </label>
+                            <input asp-for="Password" class="form-control bg-white text-dark" placeholder="Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+
+                        </div>
+                        <div class="mb-1">
+                            <label asp-for="ConfirmPassword" class="form-label">Confirm Password </label>
+                            <input asp-for="ConfirmPassword" class="form-control bg-white text-dark" placeholder="Confirm Password" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+                        </div>
+                        <div class="mb-1">
+                            <label asp-for="IdRol" class="form-label">Rol: </label>
+                            <select asp-for="IdRol" class="form-select bg-white text-dark">
+                            <option value="0">Select a option</option>
+                            <option value="1">Administrator</option>
+                            <option value="2">Assistant</option>
+                            </select>
+                            <span asp-validation-for="IdRol" class="text-danger"></span>
+                        </div>
+                     
+                        <input type="hidden" asp-for="Id" />
+                         <a asp-controller="User" asp-action="Index" class="btn btn-secondary">Back</a>
+                        <button type="submit" class="btn btn-light">Save</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>

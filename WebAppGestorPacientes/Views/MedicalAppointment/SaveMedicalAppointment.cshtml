@@ -1,0 +1,72 @@
+﻿@model GestorPacientes.Core.Application.ViewModels.MedicalAppointment.SaveMedicalAppointmentViewModel
+@{
+    ViewData["Title"] = "Create and edit Medical Appointmet";
+    // bool editModo = Model.Id == 0 ? false : true;
+}
+
+<div class="container-fluid">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-white text-dark">
+               @*  <h5 class="text-center">@(editModo ? $"" : "") *@ <i class="fa-solid fa-calendar-check"></i> </h5>
+            </div>
+            <div class="card-body" style="background-color: #d3d3d3">
+                <form method="post" asp-controller="MedicalAppointment" asp-action="Create">
+                    <div class="mb-1">
+                        <label asp-for="Cause" class="form-label">Cause: </label>
+                        <input asp-for="Cause" class="form-control bg-white text-dark" placeholder="Cause" />
+                        <span asp-validation-for="Cause" class="text-danger"></span>
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="Date" class="form-label">Date: </label>
+                        <input asp-for="Date" class="form-control bg-white text-dark" placeholder="Date" />
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-1">
+                        <label asp-for="Hour" class="form-label">Hour: </label>
+                        <input asp-for="Hour" class="form-control bg-white text-dark" placeholder="Hour" />
+                        <span asp-validation-for="Hour" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="PatientId" class="form-label">Patients: </label>
+                        <select asp-for="PatientId" class="form-select">
+                            @if (ViewBag.patient != null)
+                            {
+                                <option value="0">Select a patient</option>
+                                @foreach (var patients in ViewBag.patient)
+                                {
+                                    <option value="@patients.Id">@patients.Name</option>
+                                }
+                            }
+
+                        </select>
+                        <span asp-validation-for="PatientId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="DoctorId" class="form-label">Doctors: </label>
+                        <select asp-for="DoctorId" class="form-select">
+                            @if (ViewBag.doctor != null)
+                            {
+                                <option value="0">Select a doctor</option>
+                                @foreach (var doctors in ViewBag.doctor)
+                                {
+                                    <option value="@doctors.Id">@doctors.Name</option>
+                                }
+                            }
+
+                        </select>
+                        <span asp-validation-for="DoctorId" class="text-danger"></span>
+                    </div>
+
+                    <input type="hidden" asp-for="Id" />
+                    <a asp-controller="MedicalAppointment" asp-action="Index" class="btn btn-secondary">Back</a>
+                    <button type="submit" class="btn btn-light">Save</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿@model GestorPacientes.Core.Application.ViewModels.Patients.SavePatientsViewModel
+@{
+    ViewData["Title"] = "Create and edit Patients";
+    bool editModo = Model.Id == 0 ? false : true;
+}
+
+<div class="container-fluid">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-white text-dark">
+                <h5 class="text-center">@(editModo ? $"" : "") <i class="fa-solid fa-hospital-user"></i> </h5>
+            </div>
+            <div class="card-body" style="background-color: #d3d3d3">
+                <form method="post" enctype="multipart/form-data" asp-controller="Patient" asp-action="@(editModo ? "Edit" : "Create")">
+                    <div class="mb-1">
+                        <label asp-for="Name" class="form-label">Name: </label>
+                        <input asp-for="Name" class="form-control bg-white text-dark" placeholder="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="LastName" class="form-label">Last Name: </label>
+                        <input asp-for="LastName" class="form-control bg-white text-dark" placeholder="Last Name" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-1">
+                        <label asp-for="File" class="form-label">File: </label>
+                        @if (editModo)
+                        {
+                            <input asp-for="File" class="form-control bg-white text-dark" />
+                        }
+                        else
+                        {
+                            <input required asp-for="File" class="form-control bg-white text-dark" />
+                        }
+
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="Phone" class="form-label">Phone: </label>
+                        <input asp-for="Phone" class="form-control bg-white text-dark" placeholder="Phone" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="Direction" class="form-label">Direction: </label>
+                        <input asp-for="Direction" class="form-control bg-white text-dark" placeholder="Direction" />
+                        <span asp-validation-for="Direction" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="BirthDate" class="form-label">BirthDate: </label>
+                        <input asp-for="BirthDate" class="form-control bg-white text-dark" placeholder="BirthDate" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="Identification" class="form-label">Identification: </label>
+                        <input asp-for="Identification" class="form-control bg-white text-dark" placeholder="Identification" />
+                        <span asp-validation-for="Identification" class="text-danger"></span>
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="IsAllergy" class="form-label">Is Allergy: </label>
+                        <select asp-for="IsAllergy" class="form-select bg-white text-dark"> 
+                            <option value=" ">Select a option</option>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                        <span asp-validation-for="IsAllergy" class="text-danger"></span>
+                    </div>
+                    <div class="mb-1">
+                        <label asp-for="IsSmoker" class="form-label">Is Smoker: </label>
+                        <select asp-for="IsSmoker" class="form-select bg-white text-dark">
+                            <option value=" ">Select a option</option>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                        <span asp-validation-for="IsSmoker" class="text-danger"></span>
+                    </div>
+
+                    <input type="hidden" asp-for="Id" />
+                    <a asp-controller="Patient" asp-action="Index" class="btn btn-secondary">Back</a>
+                    <button type="submit" class="btn btn-light">Save</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

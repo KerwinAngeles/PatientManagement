@@ -1,0 +1,64 @@
+﻿@using GestorPacientes.Core.Application.ViewModels.Patients;
+
+@model List<PatientsViewModel>;
+
+@{
+    ViewData["Title"] = "All Patients";
+}
+
+<body class="bgImage">
+    <div class="col-md-12 col-md-offset-1 justify-content-center align-content-center">
+
+
+        <div class="mb-3">
+            <a asp-controller="Patient" asp-action="Create" class="btn btn-secondary">Create</a>
+        </div>
+
+        <div>
+            <form method="post">
+                <div class="justify-content-center">
+                    <div class="col-auto">
+                        <table class="table table-striped table-bordered table-list" style="background-color: #ffffff">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Last Name</th>
+                                    <th>Photo</th>
+                                    <th>Phone</th>
+                                    <th>Direction</th>
+                                    <th>Identification</th>
+                                    <th>BirthDate</th>
+                                    <th>Smoker</th>
+                                    <th>Allergy</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            @foreach (GestorPacientes.Core.Application.ViewModels.Patients.PatientsViewModel item in Model)
+                            {
+                                <tbody class="text-center" style="background-color: #fff0f3">
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>@item.LastName</td>
+                                        <td><img class="bd-placeholder-img" width="80" height="60" src="@item.Photo"/></td>
+                                        <td>@item.Phone</td>
+                                        <td>@item.Direction</td>
+                                        <td>@item.Identification</td>
+                                        <td>@item.BirthDate</td>
+                                        <td>@item.IsSmoker</td>
+                                        <td>@item.IsAllergy</td>
+
+                                        <td align="center">
+                                            <a asp-controller="Patient" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a asp-controller="Patient" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-delete-left"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
