@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace GestorPacientes.Core.Application.Interfaces.Services
 {
-    public interface ILaboratoryTestResultService : IGenericService<SaveLaboratoryTestResultViewModel, LaboratoryTestResultViewModel>
+    public interface ILaboratoryTestResultService : IGenericService<SaveLaboratoryTestResultViewModel, LaboratoryTestResultViewModel, LaboratoryTestResult>
     {
         Task<LaboratoryTestResultViewModel> GetIdentification(string identification);
         Task<List<LaboratoryTestResultViewModel>> GetListLaboratoryTest(int id);
-
         Task<List<LaboratoryTestResultViewModel>> GetListLaboratoryTestComplete(int id);
+        Task<List<LaboratoryTestResultViewModel>> GetAllLaboratoryWithPatientAndLaboratoryTest();
         Task CompleteResult(SaveLaboratoryTestResultViewModel labResult);
 
     }

@@ -75,7 +75,7 @@ namespace WebAppGestorPacientes.Controllers
                 return View("SaveLaboratoryTest", saveLaboratoryTest);
             }
 
-            await _laboratoryTestService.Update(saveLaboratoryTest);
+            await _laboratoryTestService.Update(saveLaboratoryTest, saveLaboratoryTest.Id);
             return RedirectToRoute(new { controller = "LaboratoryTest", action = "Index" });
 
         }

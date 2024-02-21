@@ -27,11 +27,11 @@ namespace GestorPacientes.Core.Application.ViewModels.MedicalAppointment
         public string State { get; set; } = "Pending";
 
         [Range(1, int.MaxValue, ErrorMessage = "You must select a patient!!")]
-        public int PatientId { get; set; }
+        public int IdPatient { get; set; }
         public List<PatientsViewModel>? Patients { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "You must select a doctor!!")]
-        public int DoctorId { get; set; }
+        public int IdDoctor { get; set; }
         public List<DoctorsViewModel>? Doctors { get; set; }
     }
 }

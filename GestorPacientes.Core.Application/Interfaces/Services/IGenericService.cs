@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace GestorPacientes.Core.Application.Interfaces.Services
 {
-    public interface IGenericService<SaveViewModel, ViewModel>
+    public interface IGenericService<SaveViewModel, ViewModel, Entity>
         where SaveViewModel : class
         where ViewModel : class
+        where Entity : class
     {
         Task<SaveViewModel> Add(SaveViewModel createProduct);
-        Task Update(SaveViewModel updateProduct);
+        Task Update(SaveViewModel updateProduct, int id);
         Task Delete(int id);
         Task<List<ViewModel>> GetAll();
         Task<SaveViewModel> GetById(int id);

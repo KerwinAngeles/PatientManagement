@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GestorPacientes.Core.Application.ViewModels.LaboratoryTestResult;
+using GestorPacientes.Core.Application.ViewModels.MedicalAppointment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +20,8 @@ namespace GestorPacientes.Core.Application.ViewModels.Patients
         public string? IsSmoker { get; set; }
         public string? IsAllergy { get; set; }
         public string? Photo { get; set; }
+
+        public ICollection<MedicalAppointmentViewModel> Appointments { get; set; } = null!;
+        public ICollection<LaboratoryTestResultViewModel> Tests { get; } = null!;
     }
 }

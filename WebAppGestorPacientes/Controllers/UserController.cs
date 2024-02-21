@@ -25,7 +25,7 @@ namespace WebAppGestorPacientes.Controllers
             {
                 return RedirectToRoute(new { controller = "Login", action = "Index" });
             }
-            return View(await _userService.GetAll());
+            return View(await _userService.GetAllUserWithRol());
         }
 
         public IActionResult Create()
@@ -83,7 +83,7 @@ namespace WebAppGestorPacientes.Controllers
                 return View("SaveUser", saveUser);
             }
 
-            await _userService.Update(saveUser);
+            await _userService.Update(saveUser, saveUser.Id);
             return RedirectToRoute(new { controller = "User", action = "Index" });
 
         }

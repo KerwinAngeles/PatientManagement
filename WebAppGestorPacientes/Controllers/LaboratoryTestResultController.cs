@@ -28,7 +28,34 @@ namespace WebAppGestorPacientes.Controllers
             {
                 return RedirectToRoute(new { controller = "Login", action = "Index" });
             }
-            return View(await _laboratoryTestResultService.GetAll());
+            return View(await _laboratoryTestResultService.GetAllLaboratoryWithPatientAndLaboratoryTest());
+        }
+
+        public async Task<IActionResult> ListLaboratoryResult(int id)
+        {
+            if (!_validateUserSession.HasUser())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
+            return View(await _laboratoryTestResultService.GetListLaboratoryTest(id));
+        }
+
+        public async Task<IActionResult> LabTestComplete(int id)
+        {
+            if (!_validateUserSession.HasUser())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
+            return View(await _laboratoryTestResultService.GetListLaboratoryTestComplete(id));
+        }
+        public IActionResult ReportResult(int Id)
+        {
+            if (!_validateUserSession.HasUser())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
+            ViewBag.labId = Id;
+            return View("ReportResult", new SaveLaboratoryTestResultViewModel());
         }
         public async Task<IActionResult> Create(int id)
         {
@@ -81,24 +108,6 @@ namespace WebAppGestorPacientes.Controllers
             return View("Index", labResultViewModel);
         }
 
-        public async Task<IActionResult> ListLaboratoryResult(int id)
-        {
-            if (!_validateUserSession.HasUser())
-            {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
-            }
-            return View(await _laboratoryTestResultService.GetListLaboratoryTest(id));
-        }
-
-        public IActionResult ReportResult(int Id)
-        {
-            if (!_validateUserSession.HasUser())
-            {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
-            }
-            ViewBag.labId = Id;
-            return View("ReportResult", new SaveLaboratoryTestResultViewModel());
-        }
 
         [HttpPost]
         public async Task<IActionResult> ReportResult(SaveLaboratoryTestResultViewModel saveLaboratory)
@@ -118,13 +127,6 @@ namespace WebAppGestorPacientes.Controllers
             return RedirectToRoute(new { controller = "LaboratoryTestResult", action = "Index" });
         }
 
-        public async Task<IActionResult> LabTestComplete(int id)
-        {
-            if (!_validateUserSession.HasUser())
-            {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
-            }
-            return View(await _laboratoryTestResultService.GetListLaboratoryTestComplete(id));
-        }
+      
     }
 }

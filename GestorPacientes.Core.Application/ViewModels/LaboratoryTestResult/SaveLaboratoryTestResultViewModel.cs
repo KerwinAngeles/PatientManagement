@@ -20,13 +20,14 @@ namespace GestorPacientes.Core.Application.ViewModels.LaboratoryTestResult
         public string Result {  get; set; } = null!;
 
         [Range(1, int.MaxValue, ErrorMessage = "You must select a laboratory test!!")]
-        public int LaboratoryTestId { get; set; }
+        public int IdLaboratoryTest { get; set; }
         public List<int>? LaboratoryTests { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "You must select a patient!!")]
-        public int PatientId { get; set; }
+        public int IdPatient { get; set; }
         public List<int>? Patients { get; set; }
-        public int MedicalAppointmentId { get; set; }
+        public int IdMedicalAppointment { get; set; }
+        public List<int>? Appointments {  get; set; }
        
     }
 }

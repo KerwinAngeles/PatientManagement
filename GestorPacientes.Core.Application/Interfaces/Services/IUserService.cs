@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace GestorPacientes.Core.Application.Interfaces.Services
 {
-    public interface IUserService : IGenericService<SaveUserViewModel, UserViewModel>
+    public interface IUserService : IGenericService<SaveUserViewModel, UserViewModel, User>
     {
         Task<bool> FindByNameAsync(string UserName);
+        Task<List<UserViewModel>> GetAllUserWithRol();
         Task<UserViewModel> LoginAsync(LoginViewModel loginViewModel);
 
     }

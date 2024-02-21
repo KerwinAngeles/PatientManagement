@@ -1,4 +1,5 @@
-﻿using GestorPacientes.Core.Application.Interfaces.Repositories;
+﻿using AutoMapper;
+using GestorPacientes.Core.Application.Interfaces.Repositories;
 using GestorPacientes.Core.Application.Interfaces.Services;
 using GestorPacientes.Core.Application.ViewModels.Users;
 using GestorPacientes.Core.Domain.Entities;
@@ -11,12 +12,14 @@ using System.Threading.Tasks;
 
 namespace GestorPacientes.Core.Application.Services
 {
-    public class UserService : IUserService
+    public class UserService : GenericService<SaveUserViewModel, UserViewModel, User>, IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IMapper _mapper;
+        public UserService(IUserRepository userRepository, IMapper mapper) : base(userRepository, mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         public async Task<UserViewModel> LoginAsync(LoginViewModel loginViewModel)
@@ -28,59 +31,11 @@ namespace GestorPacientes.Core.Application.Services
                 return null;
             }
 
-            UserViewModel userViewModel = new UserViewModel();
-            userViewModel.Name = user.Name;
-            userViewModel.LastName = user.LastName;
-            userViewModel.Email = user.Email;
-            userViewModel.UserName = user.UserName;
-            userViewModel.Password = user.Password;
-            userViewModel.IdRol = user.IdRol;
-
+            UserViewModel userViewModel = _mapper.Map<UserViewModel>(user);
             return userViewModel;
         }
 
-        public async Task<SaveUserViewModel> Add(SaveUserViewModel saveUser)
-        {
-            User user = new User();
-            user.Name = saveUser.Name;
-            user.LastName = saveUser.LastName;
-            user.Email = saveUser.Email;
-            user.UserName = saveUser.UserName;
-            user.Password = saveUser.Password;
-            user.IdRol = saveUser.IdRol;
-
-            user = await _userRepository.AddAsync(user);
-
-            SaveUserViewModel userViewModel = new();
-            userViewModel.Name = user.Name;
-            userViewModel.LastName = user.LastName;
-            userViewModel.Email = user.Email;
-            userViewModel.UserName = user.UserName;
-            userViewModel.Password = user.Password;
-            userViewModel.IdRol = user.IdRol;
-
-            return userViewModel;
-        }
-
-        public async Task Update(SaveUserViewModel saveUser)
-        {
-            var userExist = await _userRepository.GetById(saveUser.Id);
-            userExist.Id = saveUser.Id;
-            userExist.Name = saveUser.Name;
-            userExist.LastName = saveUser.LastName;
-            userExist.Email = saveUser.Email;
-            userExist.UserName = saveUser.UserName;
-            userExist.Password = saveUser.Password;
-            await _userRepository.UpdateAsync(userExist);
-        }
-
-        public async Task Delete(int id)
-        {
-            var user = await _userRepository.GetById(id);
-            await _userRepository.DeleteAsync(user);
-        }
-
-        public async Task<List<UserViewModel>> GetAll()
+        public async Task<List<UserViewModel>> GetAllUserWithRol()
         {
             var user = await _userRepository.GetAllWithInclude(new List<string> { "Rol"});
                 
@@ -96,29 +51,11 @@ namespace GestorPacientes.Core.Application.Services
             }).ToList();
         }
 
-        public async Task<SaveUserViewModel> GetById(int id)
-        {
-            var user = await _userRepository.GetById(id);
-            SaveUserViewModel saveUserViewModel = new()
-            {
-                Id = user.Id,
-                Name = user.Name,
-                LastName = user.LastName,
-                Email = user.Email,
-                UserName = user.UserName,
-                Password = user.Password,
-                IdRol = user.IdRol
-            };
-           
-            return saveUserViewModel;
-        }
-
         public async Task<bool> FindByNameAsync(string userName)
         {
             return  await _userRepository.FindByNameAsync(userName);
             
         }
-
 
     }
 }

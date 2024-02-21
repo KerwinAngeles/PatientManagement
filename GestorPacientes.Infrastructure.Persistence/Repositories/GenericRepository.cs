@@ -24,9 +24,10 @@ namespace GestorPacientes.Infrastructure.Persistence.Repositories
             return entity;
         }
 
-        public virtual async Task UpdateAsync(Entity entity)
+        public virtual async Task UpdateAsync(Entity entity, int id)
         {
-            _context.Entry(entity).State = EntityState.Modified;
+            Entity entry = await _context.Set<Entity>().FindAsync(id);
+            _context.Entry(entry).CurrentValues.SetValues(entity);
             await _context.SaveChangesAsync();
         }
 

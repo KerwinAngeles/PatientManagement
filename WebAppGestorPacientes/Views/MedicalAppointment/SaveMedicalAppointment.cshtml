@@ -1,14 +1,13 @@
 ﻿@model GestorPacientes.Core.Application.ViewModels.MedicalAppointment.SaveMedicalAppointmentViewModel
 @{
-    ViewData["Title"] = "Create and edit Medical Appointmet";
-    // bool editModo = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Create Medical Appointmet";
 }
 
 <div class="container-fluid">
     <div class="col-6 offset-3">
         <div class="card">
             <div class="card-header bg-white text-dark">
-               @*  <h5 class="text-center">@(editModo ? $"" : "") *@ <i class="fa-solid fa-calendar-check"></i> </h5>
+             <i class="fa-solid fa-calendar-check"></i> </h5>
             </div>
             <div class="card-body" style="background-color: #d3d3d3">
                 <form method="post" asp-controller="MedicalAppointment" asp-action="Create">
@@ -30,8 +29,8 @@
 
                     </div>
                     <div class="mb-3">
-                        <label asp-for="PatientId" class="form-label">Patients: </label>
-                        <select asp-for="PatientId" class="form-select">
+                        <label asp-for="IdPatient" class="form-label">Patients: </label>
+                        <select asp-for="IdPatient" class="form-select">
                             @if (ViewBag.patient != null)
                             {
                                 <option value="0">Select a patient</option>
@@ -42,12 +41,12 @@
                             }
 
                         </select>
-                        <span asp-validation-for="PatientId" class="text-danger"></span>
+                        <span asp-validation-for="IdPatient" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
-                        <label asp-for="DoctorId" class="form-label">Doctors: </label>
-                        <select asp-for="DoctorId" class="form-select">
+                        <label asp-for="IdDoctor" class="form-label">Doctors: </label>
+                        <select asp-for="IdDoctor" class="form-select">
                             @if (ViewBag.doctor != null)
                             {
                                 <option value="0">Select a doctor</option>
@@ -58,7 +57,7 @@
                             }
 
                         </select>
-                        <span asp-validation-for="DoctorId" class="text-danger"></span>
+                        <span asp-validation-for="IdDoctor" class="text-danger"></span>
                     </div>
 
                     <input type="hidden" asp-for="Id" />

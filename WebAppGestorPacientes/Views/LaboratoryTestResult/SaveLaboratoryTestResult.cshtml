@@ -12,10 +12,10 @@
             </div>
             <div class="card-body" style="background-color: #d3d3d3">
                 <form method="post" asp-controller="LaboratoryTestResult" asp-action="Create">
-                    <input type="hidden" value="@medicalAppointment" asp-for="MedicalAppointmentId" />
+                    <input type="hidden" value="@medicalAppointment" asp-for="IdMedicalAppointment" />
                     <div class="mb-3">
-                        <label asp-for="LaboratoryTestId" class="form-label">Laboratory Test: </label>
-                        <select asp-for="LaboratoryTests" class="form-select" multiple>
+                        <label asp-for="IdLaboratoryTest" class="form-label">Laboratory Test: </label>
+                        <select asp-for="LaboratoryTests" class="form-control selectpicker" multiple>
                             @if (ViewBag.laboratory != null)
                             {
                                 <option value="0">Select a Laboratory Test</option>
@@ -25,7 +25,7 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="LaboratoryTestId" class="text-danger"></span>
+                        <span asp-validation-for="IdLaboratoryTest" class="text-danger"></span>
                     </div>
     
                     <input type="hidden" asp-for="Id" />

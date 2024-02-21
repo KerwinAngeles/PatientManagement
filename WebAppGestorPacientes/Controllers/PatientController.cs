@@ -54,7 +54,7 @@ namespace WebAppGestorPacientes.Controllers
             if (patientViewModel != null && patientViewModel.Id != 0)
             {
                 patientViewModel.Photo = UploadFile(savePatient.File, patientViewModel.Id);
-                await _patientService.Update(patientViewModel);
+                await _patientService.Update(patientViewModel, patientViewModel.Id);
             }
             return RedirectToRoute(new { controller = "Patient", action = "Index" });
         }
@@ -84,7 +84,7 @@ namespace WebAppGestorPacientes.Controllers
             SavePatientsViewModel patientViewModel = await _patientService.GetById(savePatient.Id);
             savePatient.Photo = UploadFile(savePatient.File, savePatient.Id, true, patientViewModel.Photo);
 
-            await _patientService.Update(savePatient);
+            await _patientService.Update(savePatient, savePatient.Id);
             return RedirectToRoute(new { controller = "Patient", action = "Index" });
 
         }

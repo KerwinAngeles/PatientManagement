@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorPacientes.Core.Application.ViewModels.LaboratoryTestResult;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace GestorPacientes.Core.Application.ViewModels.LaboratoryTest
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
+
+        public ICollection<LaboratoryTestResultViewModel> Tests { get; } = null!;
 
     }
 }

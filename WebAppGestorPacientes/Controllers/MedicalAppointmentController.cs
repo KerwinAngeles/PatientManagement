@@ -30,7 +30,7 @@ namespace WebAppGestorPacientes.Controllers
             {
                 return RedirectToRoute(new { controller = "Login", action = "Index" });
             }
-            return View(await _medicalAppointmentService.GetAll());
+            return View(await _medicalAppointmentService.GetAllAppointmetWithPatientAndDoctor());
         }
 
         public async Task<IActionResult> Create()
